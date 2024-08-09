@@ -10,7 +10,7 @@ const MAX_LIKES = 200; //Максимальное количество лайк�
 const MIN_COMMENTS_NUM = 0; //Минимальное количество комментариев
 const MAX_COMMENTS_NUM = 29; //Максимальное количество комментариев
 
-const NAMES_QUANTITY = 10; //Количество имен
+const NAMES_QUANTITY = NAMES_SET.length; //Количество имен
 
 const MIN_AVA_NUMBER = 1; //Ноачальный номер аватарки
 const MAX_AVA_NUMBER = 6; //конечный номер аватарки
@@ -18,7 +18,8 @@ const MAX_AVA_NUMBER = 6; //конечный номер аватарки
 const MIN_MSG_NUMBER = 1; //Начальный номер сообщения в массиве
 const MAX_MSG_NUMBER = 6; //Конечный номер сообщения в массиве
 
-const PHOTO_DSCR_QUANTITY = 25; //Количество фотографий с описанием
+const PHOTO_QUANTITY = 25; //Количество фотографий с описанием
+const PHOTO_DSCR_QUNTITY = DSCRP_SET.length; //Количество готовых подписей к фотографиям
 
 const idGen = () => Number((String(Date.now() / Math.random())).replaceAll('.', ''));
 const rndmIntgrGen = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
@@ -44,14 +45,14 @@ function сreatePhotoDscrp(num) {
   return {
     id: num,
     url: `photos/${ String(num)}.jpg`,
-    dscrp: DSCRP_SET[num - 1],
+    dscrp: DSCRP_SET[rndmIntgrGen(1, PHOTO_DSCR_QUNTITY)],
     likes: rndmIntgrGen(MIN_LIKES, MAX_LIKES),
     comments: commentsSet
   };
 }
 
 const photoDscrp = [];
-for (let i = 1; i <= PHOTO_DSCR_QUANTITY; i++) {
+for (let i = 1; i <= PHOTO_QUANTITY; i++) {
   photoDscrp[i] = сreatePhotoDscrp(i);
   //window.console.log(photoDscrp[i]);
 }

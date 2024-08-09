@@ -57,4 +57,4 @@ for (let i = 1; i <= PHOTO_QUANTITY; i++) {
   //window.console.log(photoDscrp[i]);
 }
 
-window.console.log(photoDscrp[1]);
+window.console.log(photoDscrp[25]);

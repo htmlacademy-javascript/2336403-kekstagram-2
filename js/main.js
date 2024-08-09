@@ -18,6 +18,8 @@ const MAX_AVA_NUMBER = 6; //конечный номер аватарки
 const MIN_MSSG_NUMBER = 1; //Начальный номер сообщения в массиве
 const MAX_MSSG_NUMBER = 6; //Конечный номер сообщения в массиве
 
+const PHOTO_DSCR_QUANTITY = 25; //Количество фотографий с описанием
+
 const idGen = () => Number((String(Date.now() / Math.random())).replaceAll('.', ''));
 const rndmIntgrGen = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -49,7 +51,7 @@ function CreatePhotoDscrp(num) {
 }
 
 const photoDscrp = [];
-for (let i = 1; i <= 25; i++) {
+for (let i = 1; i <= PHOTO_DSCR_QUANTITY; i++) {
   photoDscrp[i] = CreatePhotoDscrp(i);
   //window.console.log(photoDscrp[i]);
 }

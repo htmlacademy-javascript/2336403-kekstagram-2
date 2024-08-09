@@ -23,7 +23,7 @@ const PHOTO_DSCR_QUANTITY = 25; //Количество фотографий с �
 const idGen = () => Number((String(Date.now() / Math.random())).replaceAll('.', ''));
 const rndmIntgrGen = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-function CreateComment() {
+function сreateComment() {
   const avatarGen = () => `img/avatar-${String(rndmIntgrGen(MIN_AVA_NUMBER, MAX_AVA_NUMBER))}.svg`;
   return {
     id: idGen(),
@@ -33,10 +33,10 @@ function CreateComment() {
   };
 }
 
-function CreatePhotoDscrp(num) {
+function сreatePhotoDscrp(num) {
   let commentsSet = [];
   for (let i = 0; i <= rndmIntgrGen(MIN_COMMENTS_NUM, MAX_COMMENTS_NUM); i++) {
-    commentsSet[i] = CreateComment();
+    commentsSet[i] = сreateComment();
   }
   if (commentsSet.length === 1) {
     commentsSet = [];
@@ -52,7 +52,7 @@ function CreatePhotoDscrp(num) {
 
 const photoDscrp = [];
 for (let i = 1; i <= PHOTO_DSCR_QUANTITY; i++) {
-  photoDscrp[i] = CreatePhotoDscrp(i);
+  photoDscrp[i] = сreatePhotoDscrp(i);
   //window.console.log(photoDscrp[i]);
 }
 

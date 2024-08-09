@@ -21,9 +21,10 @@ const MAX_MSG_NUMBER = 6; //Конечный номер сообщения в м
 const PHOTO_QUANTITY = 25; //Количество фотографий с описанием
 const PHOTO_DSCR_QUNTITY = DSCRP_SET.length; //Количество готовых подписей к фотографиям
 
-const idGen = () => Number((String(Date.now() / Math.random())).replaceAll('.', ''));
-const rndmIntgrGen = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const idGen = () => Number((String(Date.now() / Math.random())).replaceAll('.', '')); //Генератор уникально ID
+const rndmIntgrGen = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min; //Генератор целого случайного числа из заданного диапазона
 
+//Функция создания объекта 'комментарий'
 function сreateComment() {
   const avatarGen = () => `img/avatar-${String(rndmIntgrGen(MIN_AVA_NUMBER, MAX_AVA_NUMBER))}.svg`;
   return {
@@ -34,6 +35,7 @@ function сreateComment() {
   };
 }
 
+//функция создания объекта - описание фотографии
 function сreatePhotoDscrp(num) {
   let commentsSet = [];
   for (let i = 0; i <= rndmIntgrGen(MIN_COMMENTS_NUM, MAX_COMMENTS_NUM); i++) {

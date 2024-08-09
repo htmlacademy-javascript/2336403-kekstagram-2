@@ -15,8 +15,8 @@ const NAMES_QUANTITY = 10; //Количество имен
 const MIN_AVA_NUMBER = 1; //Ноачальный номер аватарки
 const MAX_AVA_NUMBER = 6; //конечный номер аватарки
 
-const MIN_MSSG_NUMBER = 1; //Начальный номер сообщения в массиве
-const MAX_MSSG_NUMBER = 6; //Конечный номер сообщения в массиве
+const MIN_MSG_NUMBER = 1; //Начальный номер сообщения в массиве
+const MAX_MSG_NUMBER = 6; //Конечный номер сообщения в массиве
 
 const PHOTO_DSCR_QUANTITY = 25; //Количество фотографий с описанием
 
@@ -28,7 +28,7 @@ function CreateComment() {
   return {
     id: idGen(),
     avatar: avatarGen(),
-    message: `${MSGS_SET[rndmIntgrGen(MIN_MSSG_NUMBER, MAX_MSSG_NUMBER)]} ${MSGS_SET[rndmIntgrGen(0,1) * rndmIntgrGen(MIN_MSSG_NUMBER, MAX_MSSG_NUMBER)]}`,
+    message: `${MSGS_SET[rndmIntgrGen(MIN_MSG_NUMBER, MAX_MSG_NUMBER)]} ${MSGS_SET[rndmIntgrGen(0,1) * rndmIntgrGen(MIN_MSG_NUMBER, MAX_MSG_NUMBER)]}`,
     name: NAMES_SET[rndmIntgrGen(0, NAMES_QUANTITY - 1)]
   };
 }

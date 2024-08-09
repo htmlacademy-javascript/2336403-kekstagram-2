@@ -7,19 +7,33 @@ const DSCRP_SET = ['1. **Туманный рассвет**: Уютное озе�
 const idGen = () => Number((String(Date.now() / Math.random())).replaceAll('.', ''));
 const rndmIntgrGen = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
+const MIN_LIKES = 15; //Минимальное количество лайков
+const MAX_LIKES = 200; //Максимальное количество лайков
+
+const MIN_COMMENTS_NUM = 0; //Минимальное количество комментариев
+const MAX_COMMENTS_NUM = 29; //Максимальное количество комментариев
+
+const NAMES_QUANTITY = 10; //Количество имен
+
+const MIN_AVA_NUMBER = 1; //Ноачальный номер аватарки
+const MAX_AVA_NUMBER = 6; //конечный номер аватарки
+
+const MIN_MSSG_NUMBER = 1; //Начальный номер сообщения в массиве
+const MAX_MSSG_NUMBER = 6; //Конечный номер сообщения в массиве
+
 function CreateComment() {
-  const avatarGen = () => `img/avatar-${String(rndmIntgrGen(1,6))}.svg`;
+  const avatarGen = () => `img/avatar-${String(rndmIntgrGen(MIN_AVA_NUMBER, MAX_AVA_NUMBER))}.svg`;
   return {
     id: idGen(),
     avatar: avatarGen(),
-    message: `${MSGS_SET[rndmIntgrGen(1,6)]} ${MSGS_SET[rndmIntgrGen(0,1) * rndmIntgrGen(1,6)]}`,
-    name: NAMES_SET[rndmIntgrGen(0, 9)]
+    message: `${MSGS_SET[rndmIntgrGen(MIN_MSSG_NUMBER, MAX_MSSG_NUMBER)]} ${MSGS_SET[rndmIntgrGen(0,1) * rndmIntgrGen(MIN_MSSG_NUMBER, MAX_MSSG_NUMBER)]}`,
+    name: NAMES_SET[rndmIntgrGen(0, NAMES_QUANTITY - 1)]
   };
 }
 
 function CreatePhotoDscrp(num) {
   let commentsSet = [];
-  for (let i = 0; i <= rndmIntgrGen(0,29); i++) {
+  for (let i = 0; i <= rndmIntgrGen(MIN_COMMENTS_NUM, MAX_COMMENTS_NUM); i++) {
     commentsSet[i] = CreateComment();
   }
   if (commentsSet.length === 1) {
@@ -29,7 +43,7 @@ function CreatePhotoDscrp(num) {
     id: num,
     url: `photos/${ String(num)}.jpg`,
     dscrp: DSCRP_SET[num - 1],
-    likes: rndmIntgrGen(15,200),
+    likes: rndmIntgrGen(MIN_LIKES, MAX_LIKES),
     comments: commentsSet
   };
 }

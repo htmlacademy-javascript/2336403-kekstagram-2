@@ -19,14 +19,14 @@ const MIN_MSG_NUMBER = 1; //Начальный номер сообщения в 
 const MAX_MSG_NUMBER = 6; //Конечный номер сообщения в массиве
 
 const PHOTO_QUANTITY = 25; //Количество фотографий с описанием
-const PHOTO_DSCR_QUNTITY = DSCRP_SET.length; //Количество готовых подписей к фотографиям
+const PHOTO_DSCR_QUANTITY = DSCRP_SET.length; //Количество готовых подписей к фотографиям
 
 const idGen = () => Number((String(Date.now() / Math.random())).replaceAll('.', '')); //Генератор уникально ID
 const rndmIntgrGen = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min; //Генератор целого случайного числа из заданного диапазона
 
 //Функция создания объекта 'комментарий'
 function сreateComment() {
-  const avatarGen = () => `img/avatar-${String(rndmIntgrGen(MIN_AVA_NUMBER, MAX_AVA_NUMBER))}.svg`;
+  const avatarGen = () => `img/avatar-${rndmIntgrGen(MIN_AVA_NUMBER, MAX_AVA_NUMBER)}.svg`;
   return {
     id: idGen(),
     avatar: avatarGen(),
@@ -37,26 +37,27 @@ function сreateComment() {
 
 //функция создания объекта - описание фотографии
 function сreatePhotoDscrp(num) {
-  let commentsSet = [];
-  for (let i = 0; i <= rndmIntgrGen(MIN_COMMENTS_NUM, MAX_COMMENTS_NUM); i++) {
-    commentsSet[i] = сreateComment();
-  }
-  if (commentsSet.length === 1) {
-    commentsSet = [];
+  const commentsSet = [];
+  if (rndmIntgrGen(0,1) === 1) {
+    for (let i = 0; i <= rndmIntgrGen(MIN_COMMENTS_NUM, MAX_COMMENTS_NUM); i++) {
+      commentsSet.push(сreateComment());
+    }
   }
   return {
     id: num,
-    url: `photos/${ String(num)}.jpg`,
-    dscrp: DSCRP_SET[rndmIntgrGen(1, PHOTO_DSCR_QUNTITY)],
+    url: `photos/${num}.jpg`,
+    dscrp: DSCRP_SET[rndmIntgrGen(1, PHOTO_DSCR_QUANTITY)],
     likes: rndmIntgrGen(MIN_LIKES, MAX_LIKES),
     comments: commentsSet
   };
 }
 
-const photoDscrp = [];
-for (let i = 1; i <= PHOTO_QUANTITY; i++) {
-  photoDscrp[i] = сreatePhotoDscrp(i);
-  //window.console.log(photoDscrp[i]);
+function generateMockPhotos(photoQuantity) {
+  const photoDscrp = [];
+  for (let i = 1; i <= photoQuantity; i++) {
+    photoDscrp.push(сreatePhotoDscrp(i));
+  }
+  return photoDscrp;
 }
 
-window.console.log(photoDscrp[25]);
+window.console.log(generateMockPhotos(PHOTO_QUANTITY));

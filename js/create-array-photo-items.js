@@ -3,6 +3,7 @@ import {MSGS_SET, NAMES_SET, DSCRP_SET} from './data.js';
 import {idGen, rndmIntgrGen} from './utils.js';
 import {MIN_LIKES, MAX_LIKES, MIN_COMMENTS_NUM, MAX_COMMENTS_NUM, NAMES_QUANTITY, MIN_AVA_NUMBER, MAX_AVA_NUMBER, MIN_MSG_NUMBER, MAX_MSG_NUMBER, PHOTO_DSCR_QUANTITY} from './create-array-photo-items-config.js';
 
+//функция создания объекта "комментарий к фотографии"
 function сreateComment() {
   const avatarGen = () => `img/avatar-${rndmIntgrGen(MIN_AVA_NUMBER, MAX_AVA_NUMBER)}.svg`;
   return {
@@ -30,6 +31,7 @@ function сreatePhotoDscrp(num) {
   };
 }
 
+//функция создания массива фотографий с описанием
 function createArrayPhotoItems(photoQuantity) {
   const photoDscrp = [];
   for (let i = 1; i <= photoQuantity; i++) {

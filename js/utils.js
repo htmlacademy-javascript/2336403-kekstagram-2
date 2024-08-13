@@ -1,4 +1,3 @@
-
 //Генератор уникального ID
 const idGen = () => Number((String(Date.now() / Math.random())).replaceAll('.', ''));
 

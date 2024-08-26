@@ -1,4 +1,4 @@
-import {idGen, rndmIntgrGen} from './utils.js';
+import { idGen, rndmIntgrGen } from './utils.js';
 
 const MSGS_SET = ['', 'Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 
@@ -27,7 +27,7 @@ const PHOTO_QUANTITY = 25; //Количество фотографий с опи
 
 export {MIN_LIKES, MAX_LIKES, MIN_COMMENTS_NUM, MAX_COMMENTS_NUM, NAMES_QUANTITY, MIN_AVA_NUMBER, MAX_AVA_NUMBER, MIN_MSG_NUMBER, MAX_MSG_NUMBER, PHOTO_DSCR_QUANTITY, PHOTO_QUANTITY};
 
-function сreateComment() {
+function createComment() {
   const avatarGen = () => `img/avatar-${rndmIntgrGen(MIN_AVA_NUMBER, MAX_AVA_NUMBER)}.svg`;
   return {
     id: idGen(),
@@ -38,11 +38,11 @@ function сreateComment() {
 }
 
 //функция создания объекта "описание фотографии"
-function сreatePhotoDscrp(num) {
+function createPhotoDscrp(num) {
   const commentsSet = [];
   if (rndmIntgrGen(0,1) === 1) {
     for (let i = 0; i <= rndmIntgrGen(MIN_COMMENTS_NUM, MAX_COMMENTS_NUM); i++) {
-      commentsSet.push(сreateComment());
+      commentsSet.push(createComment());
     }
   }
   return {
@@ -58,9 +58,9 @@ function сreatePhotoDscrp(num) {
 function createArrayPhotoItems(photoQuantity) {
   const photoDscrp = [];
   for (let i = 1; i <= photoQuantity; i++) {
-    photoDscrp.push(сreatePhotoDscrp(i));
+    photoDscrp.push(createPhotoDscrp(i));
   }
   return photoDscrp;
 }
 
-export {createArrayPhotoItems};
+export { createArrayPhotoItems };

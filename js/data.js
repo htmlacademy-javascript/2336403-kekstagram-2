@@ -40,7 +40,7 @@ function createComment() {
 //функция создания объекта "описание фотографии"
 function createPhotoDscrp(num) {
   const commentsSet = [];
-  if (rndmIntgrGen(0,1) === 1) {
+  if (rndmIntgrGen(0,5) > 0) {
     for (let i = 0; i <= rndmIntgrGen(MIN_COMMENTS_NUM, MAX_COMMENTS_NUM); i++) {
       commentsSet.push(createComment());
     }

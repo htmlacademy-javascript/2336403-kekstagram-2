@@ -4,26 +4,25 @@ const thumbs = createArrayPhotoItems(PHOTO_QUANTITY);
 
 const template = document.querySelector('#picture').content.querySelector('.picture');
 const fragment = document.createDocumentFragment();
-const container = document.querySelector('.pictures');
+const picContainer = document.querySelector('.pictures');
 
-const createThumbnail = function (arrEl) {
+const createThumbnail = (arrEl) => {
   const thumbnail = template.cloneNode(true);
   const pictureImg = thumbnail.querySelector('.picture__img');
-  const pictureComments = thumbnail.querySelector('.picture__comments');
-  const pictureLikes = thumbnail.querySelector('.picture__likes');
+  thumbnail.querySelector('.picture__comments').textContent = arrEl.comments.length;
+  thumbnail.querySelector('.picture__likes').textContent = arrEl.likes;
+  thumbnail.dataset.pictureId = arrEl.id;
   pictureImg.src = arrEl.url;
   pictureImg.alt = arrEl.description;
-  pictureComments.textContent = arrEl.comments.length;
-  pictureLikes.textContent = arrEl.likes;
-
   return thumbnail;
 };
 
-const renderThumbs = function () {
+const renderThumbs = () => {
   thumbs.forEach((thumb) => {
     fragment.appendChild(createThumbnail(thumb));
   });
-  container.appendChild(fragment);
+  picContainer.appendChild(fragment);
 };
 
-export { renderThumbs };
+
+export { renderThumbs, thumbs, picContainer };

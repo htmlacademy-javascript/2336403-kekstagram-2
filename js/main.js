@@ -1,4 +1,3 @@
-import { renderThumbs } from './render-thumbs.js';
+import { createGallery } from './create-gallery.js';
 
-renderThumbs();
-
+createGallery();

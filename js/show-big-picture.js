@@ -25,9 +25,9 @@ const insertSocialComments = (commentsSet) => {
     img.setAttribute('alt', commentsSet[i].name);
     img.setAttribute('width', '35');
     img.setAttribute('height', '35');
-    li.appendChild(img);
-    li.appendChild(p);
-    socialComments.appendChild(li);
+    li.append(img);
+    li.append(p);
+    socialComments.append(li);
   }
 };
 

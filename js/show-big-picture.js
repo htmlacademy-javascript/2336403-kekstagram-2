@@ -66,7 +66,7 @@ const showBigPicture = (currentPicId) => {
       bigPictureSection.classList.add('hidden');
       document.body.classList.remove('modal-open');
     }
-  }, {once: true});
+  }, { once: true });
 
   bigPictureSection.classList.remove('hidden');
 };

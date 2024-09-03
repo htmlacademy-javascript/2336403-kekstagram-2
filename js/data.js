@@ -21,7 +21,7 @@ const MAX_AVA_NUMBER = 6; //конечный номер аватарки
 const MIN_MSG_NUMBER = 1; //Начальный номер сообщения в массиве
 const MAX_MSG_NUMBER = 6; //Конечный номер сообщения в массиве
 
-const PHOTO_DSCR_QUANTITY = DSCRP_SET.length; //Количество готовых подписей к фотографиям
+const PHOTO_DSCR_QUANTITY = DSCRP_SET.length - 1; //Количество готовых подписей к фотографиям
 
 const PHOTO_QUANTITY = 25; //Количество фотографий с описанием
 
@@ -40,7 +40,7 @@ function createComment() {
 //функция создания объекта "описание фотографии"
 function createPhotoDscrp(num) {
   const commentsSet = [];
-  if (rndmIntgrGen(0,1) === 1) {
+  if (rndmIntgrGen(0,5) > 0) {
     for (let i = 0; i <= rndmIntgrGen(MIN_COMMENTS_NUM, MAX_COMMENTS_NUM); i++) {
       commentsSet.push(createComment());
     }
@@ -48,7 +48,7 @@ function createPhotoDscrp(num) {
   return {
     id: num,
     url: `photos/${num}.jpg`,
-    dscrp: DSCRP_SET[rndmIntgrGen(1, PHOTO_DSCR_QUANTITY)],
+    dscrp: DSCRP_SET[rndmIntgrGen(0, PHOTO_DSCR_QUANTITY)],
     likes: rndmIntgrGen(MIN_LIKES, MAX_LIKES),
     comments: commentsSet
   };

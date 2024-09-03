@@ -16,17 +16,10 @@ const insertSocialComments = (commentsSet) => {
   for (let i = 0; i < commentsSet.length; i++) {
     const li = document.createElement('li');
     li.classList.add('social__comment');
-    const img = document.createElement('img');
-    const p = document.createElement('p');
-    p.classList.add('social__text');
-    p.textContent = commentsSet[i].message;
-    img.classList.add('social__picture');
-    img.setAttribute('src', commentsSet[i].avatar);
-    img.setAttribute('alt', commentsSet[i].name);
-    img.setAttribute('width', '35');
-    img.setAttribute('height', '35');
-    li.append(img);
-    li.append(p);
+    const imgHTML = `<img class="social__picture" src="${commentsSet[i].avatar}" alt="${commentsSet[i].name}" width="35" height="35">`;
+    const pHTML = `<p class="social__text">${commentsSet[i].message}</p>`;
+    li.insertAdjacentHTML('beforeend', imgHTML);
+    li.insertAdjacentHTML('beforeend', pHTML);
     socialComments.append(li);
   }
 };
@@ -54,19 +47,23 @@ const showBigPicture = (currentPicId) => {
   socialComments.innerHTML = '';
   insertSocialComments(thumb.comments);
 
-  bigPictureCancel.addEventListener('click', (evt) => {
-    evt.preventDefault();
+  const closeBigPicture = () => {
     bigPictureSection.classList.add('hidden');
     document.body.classList.remove('modal-open');
-  }, { once: true });
+  };
 
-  document.addEventListener('keydown', (evt) => {
+  const onBigPictureCancelClick = (evt) => {
     evt.preventDefault();
-    if (evt.key === 'Escape') {
-      bigPictureSection.classList.add('hidden');
-      document.body.classList.remove('modal-open');
-    }
-  }, { once: true });
+    closeBigPicture();
+  };
+
+  const onBigPictureKeyEscDown = (evt) => {
+    evt.preventDefault();
+    closeBigPicture();
+  };
+
+  bigPictureCancel.addEventListener('click', onBigPictureCancelClick, {once: true});
+  document.addEventListener('keydown', onBigPictureKeyEscDown, {once: true});
 
   bigPictureSection.classList.remove('hidden');
 };

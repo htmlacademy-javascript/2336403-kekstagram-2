@@ -1,5 +1,5 @@
 import { picContainer, renderThumbs } from './render-thumbs.js';
-import { showBigPicture} from './show-big-picture';
+import { showBigPicture} from './show-big-picture.js';
 
 const createGallery = () => {
   renderThumbs();

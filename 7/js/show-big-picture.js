@@ -1,4 +1,4 @@
-import { thumbs } from './render-thumbs';
+import { thumbs } from './render-thumbs.js';
 
 const bigPictureSection = document.querySelector('.big-picture');
 const bigPictureImg = bigPictureSection.querySelector('.big-picture__img').querySelector('img');

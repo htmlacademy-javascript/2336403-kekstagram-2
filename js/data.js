@@ -10,7 +10,7 @@ const DSCRP_SET = ['1. **Туманный рассвет**: Уютное озе�
 const MIN_LIKES = 15; //Минимальное количество лайков
 const MAX_LIKES = 200; //Максимальное количество лайков
 
-const MIN_COMMENTS_NUM = 0; //Минимальное количество комментариев
+const MIN_COMMENTS_NUM = 1; //Минимальное количество комментариев
 const MAX_COMMENTS_NUM = 29; //Максимальное количество комментариев
 
 const NAMES_QUANTITY = NAMES_SET.length; //Количество имен
@@ -40,7 +40,7 @@ function createComment() {
 //функция создания объекта "описание фотографии"
 function createPhotoDscrp(num) {
   const commentsSet = [];
-  if (rndmIntgrGen(0,5) > 0) {
+  if (rndmIntgrGen(0,10) > 0) {
     for (let i = 0; i <= rndmIntgrGen(MIN_COMMENTS_NUM, MAX_COMMENTS_NUM); i++) {
       commentsSet.push(createComment());
     }

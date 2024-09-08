@@ -80,8 +80,6 @@ const showBigPicture = (currentPicId) => {
   };
 
   const onBigPictureKeyEscDown = (evt) => {
-    window.console.log(evt);
-    window.console.log(isEscKey(evt));
     if (isEscKey(evt)) {
       evt.preventDefault();
       socialCommentsLoader.removeEventListener('click', onSocialCommentsLoaderClick);

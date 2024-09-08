@@ -1,4 +1,5 @@
 import { thumbs } from './render-thumbs.js';
+import { isEscKey } from './utils.js';
 
 const bigPictureSection = document.querySelector('.big-picture');
 const bigPictureImg = bigPictureSection.querySelector('.big-picture__img').querySelector('img');
@@ -79,13 +80,18 @@ const showBigPicture = (currentPicId) => {
   };
 
   const onBigPictureKeyEscDown = (evt) => {
-    evt.preventDefault();
-    socialCommentsLoader.removeEventListener('click', onSocialCommentsLoaderClick);
-    closeBigPicture();
+    window.console.log(evt);
+    window.console.log(isEscKey(evt));
+    if (isEscKey(evt)) {
+      evt.preventDefault();
+      socialCommentsLoader.removeEventListener('click', onSocialCommentsLoaderClick);
+      document.removeEventListener('keydown', onBigPictureKeyEscDown);
+      closeBigPicture();
+    }
   };
 
   bigPictureCancel.addEventListener('click', onBigPictureCancelClick, {once: true});
-  document.addEventListener('keydown', onBigPictureKeyEscDown, {once: true});
+  document.addEventListener('keydown', onBigPictureKeyEscDown);
   socialCommentsLoader.addEventListener('click', onSocialCommentsLoaderClick);
 
   bigPictureSection.classList.remove('hidden');

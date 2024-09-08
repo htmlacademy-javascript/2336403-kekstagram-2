@@ -24,10 +24,10 @@ const insertSocialComments = (commentsSet) => {
     for (let i = start; i < stop; i++) {
       const li = document.createElement('li');
       li.classList.add('social__comment');
-      const imgHTML = `<img class="social__picture" src="${commentsSet[i].avatar}" alt="${commentsSet[i].name}" width="35" height="35">`;
-      const pHTML = `<p class="social__text">${commentsSet[i].message}</p>`;
-      li.insertAdjacentHTML('beforeend', imgHTML);
-      li.insertAdjacentHTML('beforeend', pHTML);
+      const liHTML = `<img class="social__picture" src="${commentsSet[i].avatar}" alt="${commentsSet[i].name}" width="35" height="35">
+                             <p class="social__text">${commentsSet[i].message}</p>`;
+      li.insertAdjacentHTML('beforeend', liHTML);
+      window.console.log(li);
       socialComments.append(li);
       visibleCommentsCount++;
     }
@@ -41,7 +41,6 @@ const insertSocialComments = (commentsSet) => {
     socialCommentsLoader.classList.add('hidden');
   }
 };
-
 
 const showBigPicture = (currentPicId) => {
   const thumb = thumbs[currentPicId];

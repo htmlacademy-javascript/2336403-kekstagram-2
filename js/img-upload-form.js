@@ -4,10 +4,13 @@ const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
 const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancelBtn = imgUploadForm.querySelector('.img-upload__cancel');
+const textHashtags = imgUploadForm.querySelector('.text__hashtags');
+const textDescription = imgUploadForm.querySelector('.text__description');
 
 
 const closeUploadFormKeydown = (evt) => {
-  if (isEscKey(evt)) {
+  window.console.log(textHashtags === document.activeElement);
+  if ((isEscKey(evt)) && !(textHashtags === document.activeElement || textDescription === document.activeElement)) {
     evt.preventDefault();
     closeUploadForm();
   }

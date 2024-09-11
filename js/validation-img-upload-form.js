@@ -1,5 +1,7 @@
 import { numDecline } from './utils.js';
 
+const imgUploadSubmit = document.querySelector('.img-upload__submit');
+
 //Константы для валидатора//
 
 const MAX_HASHTAG_LENGTH = 20; //максимальная длина одного хештэга
@@ -9,12 +11,16 @@ const MAX_DESCRIPTION_LENGTH = 140; //Максимальная длина ком
 let hashtagErrorMessage = '';
 let descriptionErrorMessage = '';
 
+imgUploadSubmit.disabled = false;
+
 const hashtagError = () => hashtagErrorMessage;
 const descriptionError = () => descriptionErrorMessage;
 
 const isHashtagsValid = (inputStr) => {
   inputStr = inputStr.toLowerCase().trim();
   hashtagErrorMessage = '';
+  imgUploadSubmit.disabled = false;
+
   if (!inputStr) {
     return true;
   }
@@ -65,6 +71,7 @@ const isHashtagsValid = (inputStr) => {
     const isNotCompleted = requirement.check;
     if (isNotCompleted) {
       hashtagErrorMessage = requirement.error;
+      imgUploadSubmit.disabled = true;
     }
     return !isNotCompleted;
   });
@@ -73,6 +80,7 @@ const isHashtagsValid = (inputStr) => {
 const isDescriptionValid = (inputStr) => {
 
   descriptionErrorMessage = '';
+  imgUploadSubmit.disabled = false;
 
   if (!inputStr) {
     return true;
@@ -80,6 +88,7 @@ const isDescriptionValid = (inputStr) => {
 
   if (inputStr.length > MAX_DESCRIPTION_LENGTH) {
     descriptionErrorMessage = `Максимальная длина комментария не может составлять больше ${MAX_DESCRIPTION_LENGTH} символов`;
+    imgUploadSubmit.disabled = true;
     return false;
   }
 };

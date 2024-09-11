@@ -10,4 +10,13 @@ const isEscKey = (evt) => {
   }
 };
 
-export { idGen, rndmIntgrGen, isEscKey };
+//Функция склонения числительных
+const numDecline = (num, nominative, genetiveSingular, genetivePlural) => {
+  if (num % 10 === 0  || num % 100 > 4 && num % 100 < 21) {
+    return genetiveSingular;
+  }
+  return num % 10 === 1 ? nominative : genetivePlural;
+};
+
+
+export { idGen, rndmIntgrGen, isEscKey, numDecline };

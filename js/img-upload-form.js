@@ -1,5 +1,5 @@
 import { isEscKey } from './utils.js';
-import { hashtagError, isHashtagsValid, descriptionError, isDescriptionValid } from './validation-img-upload-form';
+import { hashtagError, isHashtagsValid, descriptionError, isDescriptionValid } from './validation-img-upload-form.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');

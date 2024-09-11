@@ -8,6 +8,7 @@ const imgUploadCancelBtn = imgUploadForm.querySelector('.img-upload__cancel');
 const textHashtags = imgUploadForm.querySelector('.text__hashtags');
 const textDescription = imgUploadForm.querySelector('.text__description');
 
+
 const closeUploadFormKeydown = (evt) => {
   if ((isEscKey(evt)) && !(textHashtags === document.activeElement || textDescription === document.activeElement)) {
     evt.preventDefault();

@@ -1,4 +1,5 @@
 import { thumbs } from './render-thumbs.js';
+import { isEscKey } from './utils.js';
 
 const bigPictureSection = document.querySelector('.big-picture');
 const bigPictureImg = bigPictureSection.querySelector('.big-picture__img').querySelector('img');
@@ -24,10 +25,10 @@ const insertSocialComments = (commentsSet) => {
     for (let i = start; i < stop; i++) {
       const li = document.createElement('li');
       li.classList.add('social__comment');
-      const imgHTML = `<img class="social__picture" src="${commentsSet[i].avatar}" alt="${commentsSet[i].name}" width="35" height="35">`;
-      const pHTML = `<p class="social__text">${commentsSet[i].message}</p>`;
-      li.insertAdjacentHTML('beforeend', imgHTML);
-      li.insertAdjacentHTML('beforeend', pHTML);
+      const liHTML = `<img class="social__picture" src="${commentsSet[i].avatar}" alt="${commentsSet[i].name}" width="35" height="35">
+                             <p class="social__text">${commentsSet[i].message}</p>`;
+      li.insertAdjacentHTML('beforeend', liHTML);
+      window.console.log(li);
       socialComments.append(li);
       visibleCommentsCount++;
     }
@@ -41,7 +42,6 @@ const insertSocialComments = (commentsSet) => {
     socialCommentsLoader.classList.add('hidden');
   }
 };
-
 
 const showBigPicture = (currentPicId) => {
   const thumb = thumbs[currentPicId];
@@ -80,13 +80,16 @@ const showBigPicture = (currentPicId) => {
   };
 
   const onBigPictureKeyEscDown = (evt) => {
-    evt.preventDefault();
-    socialCommentsLoader.removeEventListener('click', onSocialCommentsLoaderClick);
-    closeBigPicture();
+    if (isEscKey(evt)) {
+      evt.preventDefault();
+      socialCommentsLoader.removeEventListener('click', onSocialCommentsLoaderClick);
+      document.removeEventListener('keydown', onBigPictureKeyEscDown);
+      closeBigPicture();
+    }
   };
 
   bigPictureCancel.addEventListener('click', onBigPictureCancelClick, {once: true});
-  document.addEventListener('keydown', onBigPictureKeyEscDown, {once: true});
+  document.addEventListener('keydown', onBigPictureKeyEscDown);
   socialCommentsLoader.addEventListener('click', onSocialCommentsLoaderClick);
 
   bigPictureSection.classList.remove('hidden');

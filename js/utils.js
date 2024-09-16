@@ -1,3 +1,5 @@
+const ESC_CODE = 27;
+
 //Генератор уникального ID
 const idGen = () => Number((String(Date.now() / Math.random())).replaceAll('.', ''));
 
@@ -5,9 +7,7 @@ const idGen = () => Number((String(Date.now() / Math.random())).replaceAll('.', 
 const rndmIntgrGen = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 const isEscKey = (evt) => {
-  if (evt.key === 'Escape' || evt.key === 'Esc' || evt.keyCode === 27) {
-    return true;
-  }
+  return ['Escape', 'Esc'].includes(evt.key) || evt.code === ESC_CODE;
 };
 
 //Функция склонения числительных

@@ -1,5 +1,6 @@
 import { isEscKey } from './utils.js';
 import { hashtagError, isHashtagsValid, descriptionError, isDescriptionValid } from './validation-img-upload-form.js';
+import { restartScale, resetScale } from './scale-img-upload-form.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
@@ -23,11 +24,11 @@ const closeUploadFormKeydown = (evt) => {
 };
 
 function closeUploadForm() {
-  window.console.log('1 ', textHashtags.value);
   imgUploadForm.reset();
+  pristine.reset();
+  resetScale();
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  pristine.reset();
   document.removeEventListener('keydown', closeUploadFormKeydown);
 }
 
@@ -36,7 +37,7 @@ const openUploadForm = () => {
   document.body.classList.add('modal-open');
   imgUploadCancelBtn.addEventListener('click', closeUploadForm);
   document.addEventListener('keydown', closeUploadFormKeydown);
-  window.console.log('2 ', textHashtags.value);
+  restartScale();
 };
 
 const setImgUploadHandler = () => {

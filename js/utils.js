@@ -6,9 +6,7 @@ const idGen = () => Number((String(Date.now() / Math.random())).replaceAll('.', 
 //Генератор целого случайного числа из заданного диапазона
 const rndmIntgrGen = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-const isEscKey = (evt) => {
-  return ['Escape', 'Esc'].includes(evt.key) || evt.code === ESC_CODE;
-};
+const isEscKey = (evt) => ['Escape', 'Esc'].includes(evt.key) || evt.code === ESC_CODE;
 
 //Функция склонения числительных
 const numDecline = (num, nominative, genetiveSingular, genetivePlural) => {

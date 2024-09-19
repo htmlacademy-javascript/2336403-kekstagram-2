@@ -19,21 +19,15 @@ const descriptionError = () => descriptionErrorMessage;
 const isHashtagsValid = (inputStr) => {
   inputStr = inputStr.toLowerCase().trim();
   hashtagErrorMessage = '';
-  imgUploadSubmit.disabled = false;
+  if (descriptionErrorMessage === '') {
+    imgUploadSubmit.disabled = false;
+  }
 
   if (!inputStr) {
     return true;
   }
 
   const hashtagsArray = inputStr.split(/\s+/);
-
-  //хеш-тег не может состоять только из одной решётки;
-  //максимальная длина одного хэштега 20 символов, включая решётку;
-  //хэштеги нечувствительны к регистру: #ХэшТег и #хэштег считаются одним и тем же тегом;
-  //хэштеги разделяются пробелами;
-  //один и тот же хэштег не может быть использован дважды;
-  //нельзя указать больше пяти хэштегов;
-  //Хэштег должен начинаться с символа # (решётка) и содержать только буквы и числа
 
   const requirements = [
     {
@@ -78,14 +72,13 @@ const isHashtagsValid = (inputStr) => {
 };
 
 const isDescriptionValid = (inputStr) => {
-
   descriptionErrorMessage = '';
-  imgUploadSubmit.disabled = false;
-
+  if (hashtagErrorMessage === '') {
+    imgUploadSubmit.disabled = false;
+  }
   if (!inputStr) {
     return true;
   }
-
   if (inputStr.length > MAX_DESCRIPTION_LENGTH) {
     descriptionErrorMessage = `Максимальная длина комментария не может составлять больше ${MAX_DESCRIPTION_LENGTH} символов`;
     imgUploadSubmit.disabled = true;

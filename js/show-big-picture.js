@@ -28,7 +28,6 @@ const insertSocialComments = (commentsSet) => {
       const liHTML = `<img class="social__picture" src="${commentsSet[i].avatar}" alt="${commentsSet[i].name}" width="35" height="35">
                              <p class="social__text">${commentsSet[i].message}</p>`;
       li.insertAdjacentHTML('beforeend', liHTML);
-      window.console.log(li);
       socialComments.append(li);
       visibleCommentsCount++;
     }
@@ -79,17 +78,17 @@ const showBigPicture = (currentPicId) => {
     closeBigPicture();
   };
 
-  const onBigPictureKeyEscDown = (evt) => {
+  const onDocumentKeyDown = (evt) => {
     if (isEscKey(evt)) {
       evt.preventDefault();
       socialCommentsLoader.removeEventListener('click', onSocialCommentsLoaderClick);
-      document.removeEventListener('keydown', onBigPictureKeyEscDown);
+      document.removeEventListener('keydown', onDocumentKeyDown);
       closeBigPicture();
     }
   };
 
   bigPictureCancel.addEventListener('click', onBigPictureCancelClick, {once: true});
-  document.addEventListener('keydown', onBigPictureKeyEscDown);
+  document.addEventListener('keydown', onDocumentKeyDown);
   socialCommentsLoader.addEventListener('click', onSocialCommentsLoaderClick);
 
   bigPictureSection.classList.remove('hidden');

@@ -1,3 +1,4 @@
+import { showErrorMessage } from './show-messages.js';
 const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
 const Route = {
@@ -15,18 +16,22 @@ const ErrorText = {
   [Method.POST]: 'Не удалось отправить форму. Попробуйте ещё раз',
 };
 
-
 const load = async (route, method = Method.GET, body = null) => {
-  const response = await fetch(`${BASE_URL}${route}`, {method, body});
-  return response.ok ? await response.json() : Promise.reject(ErrorText[method]);
+  let response;
+  try {
+    response = await fetch(`${BASE_URL}${route}`, {method, body});
+    if (!response.ok) {
+      throw new Error(`${ErrorText[method]} — ${response.status}`);
+    }
+  } catch (err) {
+    window.console.log(err);
+    showErrorMessage(err);
+    return [];
+  }
+  return await response.json();
 };
 
 const getData = async () => await load(Route.GET_DATA);
+const sendData = async (body) => await load(Route.SEND_DATA, Method.POST, body);
 
-//window.console.log(await load(Route.GET_DATA));
-
-window.console.log(await getData());
-
-//export {};
-
-export { getData };
+export { getData, sendData };

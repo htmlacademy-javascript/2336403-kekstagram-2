@@ -45,7 +45,7 @@ const insertSocialComments = (commentsSet) => {
 const showBigPicture = (currentPicId) => {
   const thumb = thumbs[currentPicId];
   bigPictureImg.src = thumb.url;
-  socialCaption.textContent = thumb.dscrp;
+  socialCaption.textContent = thumb.description;
 
   //Количество лайков
   bigPictureLikesCount.textContent = thumb.likes;

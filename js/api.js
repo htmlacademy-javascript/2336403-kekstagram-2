@@ -1,37 +1,43 @@
-import { showErrorMessage } from './show-messages.js';
+import { showErrorMessage, showAllert } from './show-messages.js';
 const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
 const Route = {
   GET_DATA: '/data',
-  SEND_DATA: '/1',
-};
-
-const Method = {
-  GET: 'GET',
-  POST: 'POST',
+  SEND_DATA: '/',
 };
 
 const ErrorText = {
-  [Method.GET]: 'Не удалось загрузить данные. Попробуйте обновить страницу',
-  [Method.POST]: 'Не удалось отправить форму. Попробуйте ещё раз',
+  GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
+  SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
 };
 
-const load = async (route, method = Method.GET, body = null) => {
+const getData = async () => {
   let response;
   try {
-    response = await fetch(`${BASE_URL}${route}`, {method, body});
+    response = await fetch(`${BASE_URL}${Route.GET_DATA}`);
     if (!response.ok) {
-      throw new Error(`${ErrorText[method]} — ${response.status}`);
+      throw new Error(`${ErrorText.GET_DATA} — ${response.status}`);
     }
   } catch (err) {
-    window.console.error(err);
     showErrorMessage(err);
+    window.console.error(err);
     return [];
   }
   return await response.json();
 };
 
-const getData = async () => await load(Route.GET_DATA);
-const sendData = async (body) => await load(Route.SEND_DATA, Method.POST, body);
+const sendData = async (body) => {
+  let response;
+  try {
+    response = await fetch(`${BASE_URL}${Route.SEND_DATA}`,{method: 'POST', body});
+    if (!response.ok) {
+      throw new Error(`${ErrorText.SEND_DATA} — ${response.status}`);
+    }
+    showAllert('success');
+  } catch (err) {
+    showAllert('error');
+    throw new Error(err);
+  }
+};
 
 export { getData, sendData };

@@ -3,7 +3,6 @@ import { hashtagError, isHashtagsValid, descriptionError, isDescriptionValid } f
 import { restartScale, resetScale } from './scale-img-upload-form.js';
 import { restartFilterEffect, resetFilterEffect } from './effects-img-upload-form.js';
 import { sendData } from './api.js';
-import { showAllert } from './show-messages.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
@@ -31,14 +30,13 @@ const closeUploadFormKeydown = (evt) => {
 const onSubmitUserForm = async (event) => {
   try {
     event.preventDefault();
+    imgUploadSubmit.disabled = true;
     await sendData(new FormData(imgUploadForm));
-    showAllert();
     closeUploadForm();
   } catch(error) {
-    showAllert('error');
     window.console.error(error);
   } finally {
-    window.console.log('finally');
+    imgUploadSubmit.disabled = false;
   }
 };
 

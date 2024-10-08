@@ -26,13 +26,13 @@ const showAllert = (template = 'success') => {
   const button = document.querySelector(`.${template}__button`);
   messageClone.addEventListener('click', (evt) => {
     if (evt.target === button || evt.target.classList.contains(template)) {
+      window.console.log(evt.target);
       closeMessage();
     }
   });
   body.addEventListener('keydown', (evt) => {
-    window.console.log(evt);
     if (isEscKey(evt)) {
-      window.console.log(evt);
+      evt.stopPropagation();
       closeMessage();
     }
   }, {once: true});

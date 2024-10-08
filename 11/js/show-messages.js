@@ -1,4 +1,4 @@
-import { isEscKey } from './utils';
+import { isEscKey } from './utils.js';
 
 const REMOVE_MESSAGE_TIMEOUT = 5000;
 

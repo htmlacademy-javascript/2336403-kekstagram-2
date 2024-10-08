@@ -2,13 +2,17 @@ import { isEscKey } from './utils.js';
 import { hashtagError, isHashtagsValid, descriptionError, isDescriptionValid } from './validation-img-upload-form.js';
 import { restartScale, resetScale } from './scale-img-upload-form.js';
 import { restartFilterEffect, resetFilterEffect } from './effects-img-upload-form.js';
+import { sendData } from './api.js';
+import { showAllert } from './show-messages.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
 const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancelBtn = imgUploadForm.querySelector('.img-upload__cancel');
+const imgUploadSubmit = imgUploadForm.querySelector('.img-upload__submit');
 const textHashtags = imgUploadForm.querySelector('.text__hashtags');
 const textDescription = imgUploadForm.querySelector('.text__description');
+
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper', // Элемент, на который будут добавляться классы
@@ -24,6 +28,20 @@ const closeUploadFormKeydown = (evt) => {
   }
 };
 
+const onSubmitUserForm = async (event) => {
+  try {
+    event.preventDefault();
+    await sendData(new FormData(imgUploadForm));
+    showAllert();
+    closeUploadForm();
+  } catch(error) {
+    showAllert('error');
+    window.console.error(error);
+  } finally {
+    window.console.log('finally');
+  }
+};
+
 function closeUploadForm() {
   pristine.reset();
   resetScale();
@@ -31,6 +49,7 @@ function closeUploadForm() {
   imgUploadForm.reset();
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  imgUploadSubmit.removeEventListener('click', onSubmitUserForm);
   document.removeEventListener('keydown', closeUploadFormKeydown);
 }
 
@@ -39,6 +58,7 @@ const openUploadForm = () => {
   document.body.classList.add('modal-open');
   imgUploadCancelBtn.addEventListener('click', closeUploadForm);
   document.addEventListener('keydown', closeUploadFormKeydown);
+  imgUploadSubmit.addEventListener('click', onSubmitUserForm);
   restartScale();
   restartFilterEffect();
 };

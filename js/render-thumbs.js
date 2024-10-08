@@ -1,5 +1,4 @@
 import { getData } from './api.js';
-import { showErrorMessage } from './show-messages.js';
 
 const thumbs = await getData();
 

@@ -16,5 +16,4 @@ const numDecline = (num, nominative, genetiveSingular, genetivePlural) => {
   return num % 10 === 1 ? nominative : genetivePlural;
 };
 
-
 export { idGen, rndmIntgrGen, isEscKey, numDecline };

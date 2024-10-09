@@ -1,5 +1,5 @@
 import { picContainer, renderThumbs } from './render-thumbs.js';
-import { showBigPicture} from './show-big-picture.js';
+import { showBigPicture } from './show-big-picture.js';
 
 const createGallery = () => {
   renderThumbs();
@@ -8,7 +8,7 @@ const createGallery = () => {
     if (!currentPic) {
       return;
     }
-    showBigPicture(currentPic.dataset.pictureId - 1);
+    showBigPicture(currentPic.dataset.pictureId);
   });
 };
 

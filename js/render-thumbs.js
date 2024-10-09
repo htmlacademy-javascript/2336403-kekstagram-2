@@ -1,6 +1,6 @@
-import { createArrayPhotoItems, PHOTO_QUANTITY } from './data.js';
+import { getData } from './api.js';
 
-const thumbs = createArrayPhotoItems(PHOTO_QUANTITY);
+const thumbs = await getData();
 
 const template = document.querySelector('#picture').content.querySelector('.picture');
 const fragment = document.createDocumentFragment();

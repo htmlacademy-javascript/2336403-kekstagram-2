@@ -1,10 +1,7 @@
-import { getData } from './api.js';
-
-const thumbs = await getData();
-
 const template = document.querySelector('#picture').content.querySelector('.picture');
 const fragment = document.createDocumentFragment();
 const picContainer = document.querySelector('.pictures');
+const nativePicContainer = picContainer.innerHTML;
 
 const createThumbnail = (arrEl) => {
   const thumbnail = template.cloneNode(true);
@@ -17,12 +14,13 @@ const createThumbnail = (arrEl) => {
   return thumbnail;
 };
 
-const renderThumbs = () => {
-  thumbs.forEach((thumb) => {
+const renderThumbs = (thumbsSet) => {
+  picContainer.innerHTML = nativePicContainer;
+  thumbsSet.forEach((thumb) => {
     fragment.appendChild(createThumbnail(thumb));
   });
   picContainer.appendChild(fragment);
 };
 
 
-export { renderThumbs, thumbs, picContainer };
+export { renderThumbs, picContainer };

@@ -1,10 +1,12 @@
 const ESC_CODE = 27;
 
-//Генератор уникального ID
-const idGen = () => Number((String(Date.now() / Math.random())).replaceAll('.', ''));
+//Убрать неиспользуемый код
 
-//Генератор целого случайного числа из заданного диапазона
-const rndmIntgrGen = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+//Генератор уникального ID
+// const idGen = () => Number((String(Date.now() / Math.random())).replaceAll('.', ''));
+
+// //Генератор целого случайного числа из заданного диапазона
+// const rndmIntgrGen = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 const isEscKey = (evt) => ['Escape', 'Esc'].includes(evt.key) || evt.code === ESC_CODE;
 
@@ -16,4 +18,12 @@ const numDecline = (num, nominative, genetiveSingular, genetivePlural) => {
   return num % 10 === 1 ? nominative : genetivePlural;
 };
 
-export { idGen, rndmIntgrGen, isEscKey, numDecline };
+function debounce(callback, delay) {
+  let timeout;
+  return function() {
+    clearTimeout(timeout);
+    timeout = setTimeout(callback, delay);
+  };
+}
+
+export { isEscKey, numDecline, debounce };

@@ -3,8 +3,7 @@ const fragment = document.createDocumentFragment();
 const picContainer = document.querySelector('.pictures');
 
 const clearThumbnail = () => {
-  document.querySelectorAll('.picture').forEach((element) => element.remove());
-  window.console.log('Очистка');
+  picContainer.querySelectorAll('.picture').forEach((element) => element.remove());
 };
 
 
@@ -28,6 +27,6 @@ const renderThumbs = (thumbsSet) => {
 };
 
 
-export { renderThumbs, picContainer }; //Убрать экспорт picContainer
+export { renderThumbs };
 
 

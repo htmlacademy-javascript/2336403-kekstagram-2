@@ -1,7 +1,12 @@
 const template = document.querySelector('#picture').content.querySelector('.picture');
 const fragment = document.createDocumentFragment();
 const picContainer = document.querySelector('.pictures');
-const nativePicContainer = picContainer.innerHTML;
+
+const clearThumbnail = () => {
+  document.querySelectorAll('.picture').forEach((element) => element.remove());
+  window.console.log('Очистка');
+};
+
 
 const createThumbnail = (arrEl) => {
   const thumbnail = template.cloneNode(true);
@@ -15,7 +20,7 @@ const createThumbnail = (arrEl) => {
 };
 
 const renderThumbs = (thumbsSet) => {
-  picContainer.innerHTML = nativePicContainer;
+  clearThumbnail();
   thumbsSet.forEach((thumb) => {
     fragment.appendChild(createThumbnail(thumb));
   });
@@ -23,4 +28,6 @@ const renderThumbs = (thumbsSet) => {
 };
 
 
-export { renderThumbs, picContainer };
+export { renderThumbs, picContainer }; //Убрать экспорт picContainer
+
+

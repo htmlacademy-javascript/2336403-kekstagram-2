@@ -16,18 +16,17 @@ const makeButtonActive = (element) => {
   document.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
   element.classList.add('img-filters__button--active');
   renderThumbs(filteredData[element.id](localData));
-  window.console.log(filteredData[element.id](localData));
 };
 
 const initFilter = (thumbs) => {
   localData = thumbs;
   imgFilters.classList.remove('img-filters--inactive');
   imgFiltersForm.addEventListener('click', (evt) => {
+    evt.preventDefault();
     if (evt.target.classList.contains('img-filters__button')) {
       makeButtonActive(evt.target);
     }
   });
 };
-
 
 export { initFilter };

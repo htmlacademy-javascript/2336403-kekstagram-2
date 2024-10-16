@@ -5,7 +5,7 @@ import { restartFilterEffect, resetFilterEffect } from './effects-img-upload-for
 import { sendData } from './api.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
-const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
+const imgUploadInput = document.querySelector('.img-upload__input');//imgUploadForm.querySelector('.img-upload__input');
 const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancelBtn = imgUploadForm.querySelector('.img-upload__cancel');
 const imgUploadSubmit = imgUploadForm.querySelector('.img-upload__submit');

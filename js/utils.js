@@ -18,7 +18,7 @@ const numDecline = (num, nominative, genetiveSingular, genetivePlural) => {
   return num % 10 === 1 ? nominative : genetivePlural;
 };
 
-function debounce(callback, delay) {
+function debounce(callback, delay = 500) {
   let timeout;
   return function() {
     clearTimeout(timeout);

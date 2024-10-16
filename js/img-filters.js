@@ -2,6 +2,7 @@ import { renderThumbs } from './render-thumbs.js';
 import { debounce } from './utils.js';
 
 const MAX_RANDOM_QUANTITY = 10; //Количество случайных миниатюр
+const DEBOUNCE_TIMEOUT = 500; //Таймер для debounce
 
 const imgFilters = document.querySelector('.img-filters');
 const imgFiltersForm = imgFilters.querySelector('.img-filters__form');
@@ -17,7 +18,7 @@ const filteredData = {
 const activatesButton = (element) => {
   imgFilters.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
   element.classList.add('img-filters__button--active');
-  debounce(renderThumbs(filteredData[element.id](localData)), 500);
+  debounce(renderThumbs(filteredData[element.id](localData)), DEBOUNCE_TIMEOUT);
 };
 
 const initFilter = (thumbs) => {

@@ -1,4 +1,3 @@
-import { thumbs } from './render-thumbs.js';
 import { isEscKey } from './utils.js';
 
 const bigPictureSection = document.querySelector('.big-picture');
@@ -42,7 +41,7 @@ const insertSocialComments = (commentsSet) => {
   }
 };
 
-const showBigPicture = (currentPicId) => {
+const showBigPicture = (currentPicId, thumbs) => {
   const thumb = thumbs[currentPicId];
   bigPictureImg.src = thumb.url;
   socialCaption.textContent = thumb.description;

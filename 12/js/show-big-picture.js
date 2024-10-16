@@ -1,4 +1,3 @@
-//import { thumbs } from './render-thumbs.js';
 import { isEscKey } from './utils.js';
 
 const bigPictureSection = document.querySelector('.big-picture');

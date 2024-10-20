@@ -1,13 +1,5 @@
 const ESC_CODE = 27;
 
-//Убрать неиспользуемый код
-
-//Генератор уникального ID
-// const idGen = () => Number((String(Date.now() / Math.random())).replaceAll('.', ''));
-
-// //Генератор целого случайного числа из заданного диапазона
-// const rndmIntgrGen = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-
 const isEscKey = (evt) => ['Escape', 'Esc'].includes(evt.key) || evt.code === ESC_CODE;
 
 //Функция склонения числительных
@@ -18,11 +10,12 @@ const numDecline = (num, nominative, genetiveSingular, genetivePlural) => {
   return num % 10 === 1 ? nominative : genetivePlural;
 };
 
-function debounce(callback, delay = 500) {
+function debounce(func, wait) {
   let timeout;
-  return function() {
+  return function(...args) {
+    const context = this;
     clearTimeout(timeout);
-    timeout = setTimeout(callback, delay);
+    timeout = setTimeout(() => func.apply(context, args), wait);
   };
 }
 

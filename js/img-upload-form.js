@@ -5,13 +5,16 @@ import { restartFilterEffect, resetFilterEffect } from './effects-img-upload-for
 import { sendData } from './api.js';
 
 const imgUploadForm = document.querySelector('.img-upload__form');
-const imgUploadInput = document.querySelector('.img-upload__input');//imgUploadForm.querySelector('.img-upload__input');
+const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
+const effectsPreviews = document.querySelectorAll('.effects__preview');
+const imgUploadPreview = imgUploadForm.querySelector('.img-upload__preview img');
 const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadCancelBtn = imgUploadForm.querySelector('.img-upload__cancel');
 const imgUploadSubmit = imgUploadForm.querySelector('.img-upload__submit');
 const textHashtags = imgUploadForm.querySelector('.text__hashtags');
 const textDescription = imgUploadForm.querySelector('.text__description');
 
+const VALID_FILE_TYPES = ['image/gif', 'image/jpeg', 'image/png'];
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper', // Элемент, на который будут добавляться классы
@@ -40,6 +43,23 @@ const onSubmitUserForm = async (event) => {
   }
 };
 
+
+const onInputFileChange = (evt) => {
+  const file = evt.target.files[0];
+  const fileType = file['type'];
+
+  if (!VALID_FILE_TYPES.includes(fileType)) {
+    closeUploadForm();
+  }
+
+  const picture = URL.createObjectURL(file);
+  imgUploadPreview.src = picture;
+  effectsPreviews.forEach((preview) => {
+    preview.style.backgroundImage = `url(${picture})`;
+  });
+};
+
+
 function closeUploadForm() {
   pristine.reset();
   resetScale();
@@ -65,8 +85,12 @@ const setImgUploadHandler = () => {
   imgUploadInput.addEventListener('change', openUploadForm);
 };
 
+const initPictureUpload = () => {
+  imgUploadInput.addEventListener('change', onInputFileChange);
+};
+
 pristine.addValidator(textHashtags, isHashtagsValid, hashtagError);
 pristine.addValidator(textDescription, isDescriptionValid, descriptionError);
 
-export { setImgUploadHandler };
+export { setImgUploadHandler, initPictureUpload };
 

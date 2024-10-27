@@ -46,20 +46,17 @@ const onSubmitUserForm = async (event) => {
 
 const onInputFileChange = (evt) => {
   const file = evt.target.files[0];
-  //const fileName = file.name.toLowerCase();
   const fileType = file['type'];
 
-  //const matches = VALID_FILE_TYPES.some((it) => fileName.endsWith(it));
-
-  if (VALID_FILE_TYPES.includes(fileType)) {
-    const picture = URL.createObjectURL(file);
-    imgUploadPreview.src = picture;
-    effectsPreviews.forEach((preview) => {
-      preview.style.backgroundImage = `url(${picture})`;
-    });
-  } else {
+  if (!VALID_FILE_TYPES.includes(fileType)) {
     closeUploadForm();
   }
+
+  const picture = URL.createObjectURL(file);
+  imgUploadPreview.src = picture;
+  effectsPreviews.forEach((preview) => {
+    preview.style.backgroundImage = `url(${picture})`;
+  });
 };
 
 

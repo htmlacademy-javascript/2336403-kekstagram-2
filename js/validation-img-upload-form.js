@@ -1,6 +1,6 @@
 import { numDecline } from './utils.js';
 
-const imgUploadSubmit = document.querySelector('.img-upload__submit');
+const imgUploadSubmit = document.querySelector('.img-upload__submit'); //УДАЛИТЬ!
 
 const MAX_HASHTAG_LENGTH = 20; //максимальная длина одного хештэга
 const MAX_HASHTAG_QUANTITY = 5; //Максимальное количество хэштегов

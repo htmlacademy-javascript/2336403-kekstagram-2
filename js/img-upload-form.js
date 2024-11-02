@@ -33,7 +33,11 @@ const closeUploadFormKeydown = (evt) => {
 const onSubmitUserForm = async (event) => {
   try {
     event.preventDefault();
+    if (!(hashtagError() === '' && descriptionError() === '')) {
+      return;
+    }
     imgUploadSubmit.disabled = true;
+    window.console.log(hashtagError(), descriptionError());
     await sendData(new FormData(imgUploadForm));
     closeUploadForm();
   } catch(error) {
@@ -65,10 +69,10 @@ function closeUploadForm() {
   resetScale();
   resetFilterEffect();
   imgUploadForm.reset();
-  imgUploadOverlay.classList.add('hidden');
-  document.body.classList.remove('modal-open');
   imgUploadSubmit.removeEventListener('click', onSubmitUserForm);
   document.removeEventListener('keydown', closeUploadFormKeydown);
+  imgUploadOverlay.classList.add('hidden');
+  document.body.classList.remove('modal-open');
 }
 
 const openUploadForm = () => {

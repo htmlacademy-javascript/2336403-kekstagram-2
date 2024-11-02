@@ -6,7 +6,6 @@ const clearThumbnail = () => {
   picContainer.querySelectorAll('.picture').forEach((element) => element.remove());
 };
 
-
 const createThumbnail = (arrEl) => {
   const thumbnail = template.cloneNode(true);
   const pictureImg = thumbnail.querySelector('.picture__img');
@@ -25,7 +24,6 @@ const renderThumbs = (thumbsSet) => {
   });
   picContainer.appendChild(fragment);
 };
-
 
 export { renderThumbs };
 

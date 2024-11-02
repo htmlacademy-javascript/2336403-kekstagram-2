@@ -6,7 +6,7 @@ const bigPictureLikesCount = bigPictureSection.querySelector('.likes-count');
 const bigPictureCancel = bigPictureSection.querySelector('.big-picture__cancel');
 const bigPictureSocial = bigPictureSection.querySelector('.big-picture__social');
 const socialCommentCount = bigPictureSocial.querySelector('.social__comment-count');
-const socialCommentShowCount = socialCommentCount.querySelector('.social__comment-show-count');
+const socialCommentShownCount = socialCommentCount.querySelector('.social__comment-shown-count');
 const socialCommentsLoader = bigPictureSocial.querySelector('.social__comments-loader');
 const socialCommentTotalCount = bigPictureSocial.querySelector('.social__comment-total-count');
 const socialCaption = bigPictureSocial.querySelector('.social__caption');
@@ -17,10 +17,11 @@ const NUMBER_OF_COMMENTS_IN_BLOCK = 5; //Количество комментар
 //Процедура заполнения социальными комментариями из подготовленных данных
 const insertSocialComments = (commentsSet) => {
   const totalCommentsCount = socialCommentTotalCount.textContent;
-  let visibleCommentsCount = socialCommentShowCount.textContent;
+  let visibleCommentsCount = socialCommentShownCount.textContent;
 
   const insertBlockComments = (start, stop) => {
     socialCommentsLoader.classList.remove('hidden');
+    socialCommentShownCount.textContent = visibleCommentsCount;
     for (let i = start; i < stop; i++) {
       const li = document.createElement('li');
       li.classList.add('social__comment');
@@ -30,7 +31,7 @@ const insertSocialComments = (commentsSet) => {
       socialComments.append(li);
       visibleCommentsCount++;
     }
-    socialCommentShowCount.textContent = visibleCommentsCount;
+    socialCommentShownCount.textContent = visibleCommentsCount;
   };
 
   if (totalCommentsCount - visibleCommentsCount > NUMBER_OF_COMMENTS_IN_BLOCK) {
@@ -45,21 +46,12 @@ const showBigPicture = (currentPicId, thumbs) => {
   const thumb = thumbs[currentPicId];
   bigPictureImg.src = thumb.url;
   socialCaption.textContent = thumb.description;
-
-  //Количество лайков
   bigPictureLikesCount.textContent = thumb.likes;
-
-  document.body.classList.add('modal-open');
-
-  //Общее количество комментариев к фотографии
-  socialCommentTotalCount.textContent = String(thumb.comments.length);
-
-  //Обнуляет счетчик показанных комментариев
-  socialCommentShowCount.textContent = '0';
-
-  //Заполняет социальные комментарии под фотографией
   socialComments.innerHTML = '';
+  socialCommentTotalCount.textContent = thumb.comments.length;
+  socialCommentShownCount.textContent = '0';
   insertSocialComments(thumb.comments);
+  document.body.classList.add('modal-open');
 
   const onSocialCommentsLoaderClick = (evt) => {
     evt.preventDefault();

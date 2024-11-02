@@ -50,7 +50,7 @@ const resetFilterEffect = () =>{
 };
 
 const onSliderUpdate = () => {
-  const sliderValue = effectLevelSlider.noUiSlider.get();
+  const sliderValue = Math.round(effectLevelSlider.noUiSlider.get() * 10) / 10;
   imgUploadPreview.style.filter = isDefaultEffect() ? defaultEffect.style : `${activeEffect.style}(${sliderValue}${activeEffect.unit})`;
   effectLevelValue.value = sliderValue;
 };

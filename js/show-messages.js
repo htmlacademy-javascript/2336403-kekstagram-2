@@ -17,7 +17,9 @@ const templates = {
 
 const closeMessage = () => {
   const message = document.querySelector('.success') || document.querySelector('.error');
-  message.remove();
+  if (message) {
+    message.remove();
+  }
 };
 
 const showAllert = (template = 'success') => {

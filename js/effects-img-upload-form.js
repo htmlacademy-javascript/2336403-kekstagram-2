@@ -18,7 +18,7 @@ const effectsList = document.querySelector('.effects__list');
 
 const isDefaultEffect = () => activeEffect === defaultEffect;
 const showSlider = () => imgUploadEffectLevel.classList.remove('hidden');
-const hiddenSlider = () => imgUploadEffectLevel.classList.add('hidden');
+const hideSlider = () => imgUploadEffectLevel.classList.add('hidden');
 
 const updateSlider = () => {
   effectLevelSlider.noUiSlider.updateOptions({
@@ -31,7 +31,7 @@ const updateSlider = () => {
   });
 
   if (isDefaultEffect()){
-    hiddenSlider();
+    hideSlider();
   } else {
     showSlider();
   }
@@ -67,7 +67,7 @@ const restartFilterEffect = () => {
 
   effectsList.addEventListener('change', onEffectsListChange);
   effectLevelSlider.noUiSlider.on('update',onSliderUpdate);
-  hiddenSlider();
+  hideSlider();
 };
 
 export { restartFilterEffect, resetFilterEffect };

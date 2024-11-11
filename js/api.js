@@ -4,7 +4,7 @@ const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
 const Route = {
   GET_DATA: '/data',
-  SEND_DATA: '/1',
+  SEND_DATA: '/',
 };
 
 const ErrorText = {
@@ -22,7 +22,6 @@ const getData = async () => {
   } catch (err) {
     window.console.clear();
     showErrorMessage(err);
-    //throw new Error(err); /ПОПРОБОВАТЬ ТАК!!!
     return [];
   }
   return await response.json();
@@ -37,7 +36,6 @@ const sendData = async (body) => {
     }
     showAllert('success');
   } catch (err) {
-    //showAllert('error');
     throw new Error(err);
   }
 };

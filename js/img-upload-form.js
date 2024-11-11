@@ -1,9 +1,11 @@
 import { isEscKey } from './utils.js';
-import { hashtagError, isHashtagsValid, descriptionError, isDescriptionValid } from './validation-img-upload-form.js';
+import { sendHashtagError, isHashtagsValid, sendDescriptionError, isDescriptionValid } from './validation-img-upload-form.js';
 import { restartScale, resetScale } from './scale-img-upload-form.js';
 import { restartFilterEffect, resetFilterEffect } from './effects-img-upload-form.js';
 import { sendData } from './api.js';
-import { showErrorMessage, showAllert } from './show-messages.js';
+import { showAllert } from './show-messages.js';
+
+const VALID_FILE_TYPES = ['image/gif', 'image/jpeg', 'image/png'];
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadInput = imgUploadForm.querySelector('.img-upload__input');
@@ -14,8 +16,6 @@ const imgUploadCancelBtn = imgUploadForm.querySelector('.img-upload__cancel');
 const imgUploadSubmit = imgUploadForm.querySelector('.img-upload__submit');
 const textHashtags = imgUploadForm.querySelector('.text__hashtags');
 const textDescription = imgUploadForm.querySelector('.text__description');
-
-const VALID_FILE_TYPES = ['image/gif', 'image/jpeg', 'image/png'];
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__field-wrapper', // Элемент, на который будут добавляться классы
@@ -34,7 +34,7 @@ const closeUploadFormKeydown = (evt) => {
 const onSubmitUserForm = async (event) => {
   try {
     event.preventDefault();
-    if (!(hashtagError() === '' && descriptionError() === '')) {
+    if (!(sendHashtagError() === '' && sendDescriptionError() === '')) {
       return;
     }
     imgUploadSubmit.disabled = true;
@@ -42,7 +42,7 @@ const onSubmitUserForm = async (event) => {
     closeUploadForm();
   } catch(error) {
     showAllert('error');
-    //window.console.error(error);
+    window.console.clear();
   } finally {
     imgUploadSubmit.disabled = false;
   }
@@ -94,8 +94,8 @@ const initPictureUpload = () => {
   imgUploadInput.addEventListener('change', onInputFileChange);
 };
 
-pristine.addValidator(textHashtags, isHashtagsValid, hashtagError);
-pristine.addValidator(textDescription, isDescriptionValid, descriptionError);
+pristine.addValidator(textHashtags, isHashtagsValid, sendHashtagError);
+pristine.addValidator(textDescription, isDescriptionValid, sendDescriptionError);
 
 export { setImgUploadHandler, initPictureUpload };
 

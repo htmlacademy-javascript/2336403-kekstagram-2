@@ -1,5 +1,7 @@
 import { isEscKey } from './utils.js';
 
+const NUMBER_OF_COMMENTS_IN_BLOCK = 5; //Количество комментариев за одну загрузку
+
 const bigPictureSection = document.querySelector('.big-picture');
 const bigPictureImg = bigPictureSection.querySelector('.big-picture__img').querySelector('img');
 const bigPictureLikesCount = bigPictureSection.querySelector('.likes-count');
@@ -11,8 +13,6 @@ const socialCommentsLoader = bigPictureSocial.querySelector('.social__comments-l
 const socialCommentTotalCount = bigPictureSocial.querySelector('.social__comment-total-count');
 const socialCaption = bigPictureSocial.querySelector('.social__caption');
 const socialComments = bigPictureSocial.querySelector('.social__comments'); //Список социальных комментариев
-
-const NUMBER_OF_COMMENTS_IN_BLOCK = 5; //Количество комментариев за одну загрузку
 
 //Процедура заполнения социальными комментариями из подготовленных данных
 const insertSocialComments = (commentsSet) => {

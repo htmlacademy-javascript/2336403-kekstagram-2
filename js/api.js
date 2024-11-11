@@ -20,8 +20,8 @@ const getData = async () => {
       throw new Error(`${ErrorText.GET_DATA} — ${response.status}`);
     }
   } catch (err) {
+    window.console.clear();
     showErrorMessage(err);
-    window.console.error(err);
     return [];
   }
   return await response.json();
@@ -36,7 +36,6 @@ const sendData = async (body) => {
     }
     showAllert('success');
   } catch (err) {
-    showAllert('error');
     throw new Error(err);
   }
 };

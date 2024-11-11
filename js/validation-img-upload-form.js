@@ -1,18 +1,18 @@
-import { numDecline } from './utils.js';
-
-const imgUploadSubmit = document.querySelector('.img-upload__submit');
+import { declinesNumeral } from './utils.js';
 
 const MAX_HASHTAG_LENGTH = 20; //максимальная длина одного хештэга
 const MAX_HASHTAG_QUANTITY = 5; //Максимальное количество хэштегов
 const MAX_DESCRIPTION_LENGTH = 140; //Максимальная длина комментария
+
+const imgUploadSubmit = document.querySelector('.img-upload__submit');
 
 let hashtagErrorMessage = '';
 let descriptionErrorMessage = '';
 
 imgUploadSubmit.disabled = false;
 
-const hashtagError = () => hashtagErrorMessage;
-const descriptionError = () => descriptionErrorMessage;
+const sendHashtagError = () => hashtagErrorMessage;
+const sendDescriptionError = () => descriptionErrorMessage;
 
 const isHashtagsValid = (inputStr) => {
   inputStr = inputStr.toLowerCase().trim();
@@ -50,7 +50,7 @@ const isHashtagsValid = (inputStr) => {
     },
     {
       check: hashtagsArray.length > MAX_HASHTAG_QUANTITY,
-      error: `Нельзя указать больше ${MAX_HASHTAG_QUANTITY} ${numDecline(
+      error: `Нельзя указать больше ${MAX_HASHTAG_QUANTITY} ${declinesNumeral(
         MAX_HASHTAG_LENGTH, 'хештега', 'хештегов', 'хештегов')}`,
     },
     {
@@ -84,4 +84,4 @@ const isDescriptionValid = (inputStr) => {
   }
 };
 
-export { hashtagError, isHashtagsValid, descriptionError, isDescriptionValid };
+export { sendHashtagError, isHashtagsValid, sendDescriptionError, isDescriptionValid };
